@@ -6,7 +6,7 @@ import { Message } from '@messaging/types';
 import MessageBubble from './MessageBubble';
 
 interface Props {
-  messages:   Message[];
+  messages: Message[];
   currentUid: string;
 }
 
@@ -19,7 +19,7 @@ function DateDivider({ date }: { date: Date }) {
 
   return (
     <div className="flex items-center justify-center my-4">
-      <span className="bg-gray-100 text-gray-500 text-xs px-3 py-1 rounded-full">{label}</span>
+      <span className="bg-gray-100 dark:bg-[#1e2535] text-gray-500 dark:text-[#6b7a9a] text-xs px-3 py-1 rounded-full">{label}</span>
     </div>
   );
 }
@@ -36,15 +36,15 @@ export default function MessageList({ messages, currentUid }: Props) {
   let lastDate: string | null = null;
 
   return (
-    <div className="flex-1 overflow-y-auto p-4 space-y-1 scrollbar-thin bg-gray-50">
+    <div className="flex-1 overflow-y-auto p-4 space-y-1 scrollbar-thin bg-gray-50 dark:bg-[#0b0e13]">
       {messages.map((msg, idx) => {
-        const isSender  = msg.senderId === currentUid;
-        const msgDate   = msg.timestamp ? format(msg.timestamp, 'yyyy-MM-dd') : '';
-        const showDate  = msgDate !== lastDate;
+        const isSender = msg.senderId === currentUid;
+        const msgDate = msg.timestamp ? format(msg.timestamp, 'yyyy-MM-dd') : '';
+        const showDate = msgDate !== lastDate;
         if (showDate) lastDate = msgDate;
 
         // Show avatar only for first message in a consecutive group from same sender
-        const nextMsg   = messages[idx + 1];
+        const nextMsg = messages[idx + 1];
         const showAvatar = !isSender && (!nextMsg || nextMsg.senderId !== msg.senderId);
 
         return (

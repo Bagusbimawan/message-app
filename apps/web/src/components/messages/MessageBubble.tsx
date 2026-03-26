@@ -4,55 +4,50 @@ import { Message } from '@messaging/types';
 import MediaMessage from './MediaMessage';
 
 interface Props {
-  message:    Message;
-  isSender:   boolean;
-  showAvatar: boolean;
-  senderName?: string;
-  avatarSrc?:  string | null;
+  readonly message: Message;
+  readonly isSender: boolean;
+  readonly showAvatar?: boolean;
+  readonly senderName?: string;
 }
 
-function StatusTicks({ status }: { status: Message['status'] }) {
-  const color = status === 'read' ? '#53bdeb' : '#8696a0';
-  if (status === 'sending') return <span className="text-gray-300 text-xs">⏳</span>;
-  if (status === 'sent')    return <span style={{ color }} className="text-xs">✓</span>;
+function StatusTicks({ status, isSender }: { readonly status: Message['status'], readonly isSender: boolean }) {
+  const color = status === 'read' ? (isSender ? '#ffffff' : '#53bdeb') : (isSender ? 'rgba(255,255,255,0.7)' : '#8696a0');
+  if (status === 'sending') return <span className="text-xs opacity-70">⏳</span>;
+  if (status === 'sent') return <span style={{ color }} className="text-xs">✓</span>;
   return (
-    <span style={{ color }} className="text-xs tracking-tighter">✓✓</span>
+    <span style={{ color }} className="text-xs tracking-tighter font-bold">✓✓</span>
   );
 }
 
-export default function MessageBubble({ message, isSender, showAvatar, senderName }: Props) {
+export default function MessageBubble({ message, isSender, senderName }: Props) {
   const time = message.timestamp ? format(message.timestamp, 'HH:mm') : '';
 
   return (
-    <div className={clsx('flex items-end gap-1.5 group', isSender ? 'flex-row-reverse' : 'flex-row')}>
-      {/* Spacer to preserve layout when avatar is hidden */}
-      <div className="w-7 flex-shrink-0" />
-
+    <div className={clsx('flex items-end gap-2 group mb-3', isSender ? 'flex-row-reverse' : 'flex-row')}>
       <div
         className={clsx(
-          'max-w-[70%] rounded-2xl px-3 py-2 shadow-sm',
+          'max-w-[75%] px-4 py-3 shadow-sm relative text-[15px] leading-relaxed',
           isSender
-            ? 'bg-bubble-sent rounded-br-sm'
-            : 'bg-bubble-received rounded-bl-sm border border-gray-100'
+            ? 'bg-wa-bubbleOut text-white rounded-[20px] rounded-br-[4px]'
+            : 'bg-wa-bubbleIn text-wa-text rounded-[20px] rounded-bl-[4px] border border-wa-border'
         )}
       >
-        {/* Group chat: show sender name */}
         {!isSender && senderName && (
-          <p className="text-xs font-semibold text-primary-600 mb-1">{senderName}</p>
+          <p className="text-[13px] font-semibold text-wa-primary mb-1">{senderName}</p>
         )}
 
-        {message.type === 'text' && (
-          <p className="text-sm text-gray-900 whitespace-pre-wrap break-words">{message.text}</p>
-        )}
+        <div className="flex flex-col">
+          <div className="whitespace-pre-wrap break-words">
+            {message.type === 'text' && message.text}
+            {(message.type === 'image' || message.type === 'file') && (
+              <MediaMessage message={message} />
+            )}
+          </div>
 
-        {(message.type === 'image' || message.type === 'file') && (
-          <MediaMessage message={message} />
-        )}
-
-        {/* Time + status */}
-        <div className={clsx('flex items-center gap-1 mt-1', isSender ? 'justify-end' : 'justify-start')}>
-          <span className="text-[10px] text-gray-400">{time}</span>
-          {isSender && <StatusTicks status={message.status} />}
+          <div className={clsx("flex items-center gap-1.5 self-end mt-1.5", isSender ? "text-white/90" : "text-wa-textMuted")}>
+            <span className="text-[11px] font-medium">{time}</span>
+            {isSender && <StatusTicks status={message.status} isSender={isSender} />}
+          </div>
         </div>
       </div>
     </div>

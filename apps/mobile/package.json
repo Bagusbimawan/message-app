@@ -8,7 +8,10 @@
     "android": "expo run:android",
     "ios": "expo run:ios",
     "lint": "eslint src --ext .ts,.tsx",
-    "type-check": "tsc --noEmit"
+    "type-check": "tsc --noEmit",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage"
   },
   "dependencies": {
     "@messaging/types": "*",
@@ -39,9 +42,12 @@
   "devDependencies": {
     "@babel/core": "^7.20.0",
     "@react-native/assets-registry": "^0.84.1",
+    "@testing-library/react-native": "^12.5.0",
+    "@types/jest": "^29.5.0",
     "@types/react": "~19.1.10",
     "babel-plugin-module-resolver": "^5.0.0",
     "babel-preset-expo": "^55.0.12",
+    "jest-expo": "^51.0.0",
     "typescript": "^5.4.0"
   }
 }
