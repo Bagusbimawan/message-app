@@ -5,7 +5,7 @@ import Link from 'next/link';
 import clsx from 'clsx';
 import { formatDistanceToNowStrict } from 'date-fns';
 import Avatar from '@/components/common/Avatar';
-import { Chat } from '@messaging/types';
+import { Chat } from '@/types';
 
 interface Props {
   readonly chat: Chat;

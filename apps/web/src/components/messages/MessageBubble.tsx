@@ -1,6 +1,6 @@
 import clsx from 'clsx';
 import { format } from 'date-fns';
-import { Message } from '@messaging/types';
+import { Message } from '@/types';
 import MediaMessage from './MediaMessage';
 
 interface Props {

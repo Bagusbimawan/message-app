@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import { Message } from '@messaging/types';
+import { Message } from '@/types';
 
 interface Props {
   message: Message;

@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { Chat } from '@messaging/types';
+import { Chat } from '@/types';
 import Avatar from '@/components/common/Avatar';
 import ProfilePanel from './ProfilePanel';
 

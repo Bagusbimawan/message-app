@@ -1,6 +1,6 @@
 import { render, screen } from '@testing-library/react';
 import MessageBubble from '@/components/messages/MessageBubble';
-import { Message } from '@messaging/types';
+import { Message } from '@/types';
 
 // MediaMessage not relevant to text tests
 jest.mock('@/components/messages/MediaMessage', () => ({

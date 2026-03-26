@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Avatar from '@/components/common/Avatar';
-import { UserPreview } from '@messaging/types';
+import { UserPreview } from '@/types';
 import clsx from 'clsx';
 
 interface Props {

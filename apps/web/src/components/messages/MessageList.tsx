@@ -2,7 +2,7 @@
 
 import { useEffect, useRef } from 'react';
 import { format, isToday, isYesterday } from 'date-fns';
-import { Message } from '@messaging/types';
+import { Message } from '@/types';
 import MessageBubble from './MessageBubble';
 
 interface Props {

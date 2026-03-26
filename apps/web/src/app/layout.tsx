@@ -1,3 +1,4 @@
+import React from 'react';
 import type { Metadata, Viewport } from 'next';
 import { Inter } from 'next/font/google';
 import { Toaster } from 'react-hot-toast';
@@ -26,13 +27,17 @@ export const viewport: Viewport = {
 import { ThemeProvider } from '@/components/providers/ThemeProvider';
 import { LanguageProvider } from '@/components/providers/LanguageProvider';
 
-export default function RootLayout({ children }: { readonly children: React.ReactNode }) {
+interface RootLayoutProps {
+  readonly children: React.ReactNode;
+}
+
+export default function RootLayout({ children }: RootLayoutProps) {
   return (
     <html lang="id" suppressHydrationWarning>
       <body className={inter.className}>
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           <LanguageProvider>
-            {children}
+            {children as React.ReactNode}
             <Toaster position="top-center" />
           </LanguageProvider>
         </ThemeProvider>

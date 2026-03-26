@@ -1,7 +1,7 @@
 'use client';
 
 import clsx from 'clsx';
-import { Chat } from '@messaging/types';
+import { Chat } from '@/types';
 
 interface Props {
     readonly chat: Chat;
