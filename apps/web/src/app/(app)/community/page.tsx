@@ -1,6 +1,7 @@
 'use client';
 
 import MobileNavHeader from '@/components/layout/MobileNavHeader';
+import { useLanguage } from '@/components/providers/LanguageProvider';
 
 const CHANNELS = [
     { id: 'c1', name: 'General Announcements', subscribers: 1240, icon: '📢', verified: true },
@@ -11,20 +12,22 @@ const CHANNELS = [
 ];
 
 export default function CommunityPage() {
+    const { t } = useLanguage();
+
     return (
         <div className="flex flex-col h-full bg-gray-50 dark:bg-[#0b0e13] overflow-hidden">
-            <MobileNavHeader title="Community" subtitle="Browse and join channels" />
+            <MobileNavHeader title={t('community')} subtitle={t('searchChannels')} />
             {/* Desktop header */}
             <div className="hidden md:block px-5 pt-5 pb-4 bg-white dark:bg-[#151a21] border-b border-gray-100 dark:border-[#222838] flex-shrink-0">
-                <h1 className="text-[18px] font-bold text-wa-text">Community</h1>
-                <p className="text-[12px] text-wa-textMuted mt-0.5">Browse and join channels</p>
+                <h1 className="text-[18px] font-bold text-wa-text">{t('community')}</h1>
+                <p className="text-[12px] text-wa-textMuted mt-0.5">{t('searchChannels')}</p>
             </div>
 
             {/* Featured banner */}
             <div className="mx-4 mt-4 rounded-2xl bg-gradient-to-r from-[#00d097] to-[#0099ff] p-5 text-white flex-shrink-0">
-                <p className="text-[12px] font-semibold opacity-80 mb-1">FEATURED</p>
-                <p className="text-[18px] font-extrabold leading-tight mb-1">Join 1,200+ members</p>
-                <p className="text-[13px] opacity-80">Get the latest updates from our community</p>
+                <p className="text-[12px] font-semibold opacity-80 mb-1 uppercase">{t('featuredCommunity')}</p>
+                <p className="text-[18px] font-extrabold leading-tight mb-1">{t('joinConversation')}</p>
+                <p className="text-[13px] opacity-80">{t('searchChannels')}</p>
             </div>
 
             {/* Channel grid */}
@@ -47,10 +50,10 @@ export default function CommunityPage() {
                                     </svg>
                                 )}
                             </div>
-                            <p className="text-[12px] text-wa-textMuted">{ch.subscribers.toLocaleString()} subscribers</p>
+                            <p className="text-[12px] text-wa-textMuted">{ch.subscribers.toLocaleString()} {t('subscribers').toLowerCase()}</p>
                         </div>
                         <button className="flex-shrink-0 px-3 py-1.5 rounded-lg bg-wa-primary/10 text-wa-primary text-[12px] font-bold hover:bg-wa-primary hover:text-white transition-colors">
-                            Join
+                            {t('joinBtn')}
                         </button>
                     </div>
                 ))}

@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import MobileNavHeader from '@/components/layout/MobileNavHeader';
+import { useLanguage } from '@/components/providers/LanguageProvider';
 
 interface Group {
     id: string;
@@ -24,6 +25,7 @@ export default function GroupsPage() {
     const [search, setSearch] = useState('');
     const [showCreate, setShowCreate] = useState(false);
     const [newName, setNewName] = useState('');
+    const { t } = useLanguage();
 
     const filtered = MOCK_GROUPS.filter(g =>
         g.name.toLowerCase().includes(search.toLowerCase())
@@ -31,13 +33,13 @@ export default function GroupsPage() {
 
     return (
         <div className="flex flex-col h-full bg-gray-50 dark:bg-[#0b0e13] overflow-hidden">
-            <MobileNavHeader title="Groups" subtitle={`${MOCK_GROUPS.length} groups`} />
+            <MobileNavHeader title={t('groups')} subtitle={`${MOCK_GROUPS.length} ${t('groups').toLowerCase()}`} />
             {/* Desktop header */}
             <div className="hidden md:block px-5 pt-5 pb-4 bg-white dark:bg-[#151a21] border-b border-gray-100 dark:border-[#222838] flex-shrink-0">
                 <div className="flex items-center justify-between mb-4">
                     <div>
-                        <h1 className="text-[18px] font-bold text-wa-text">Groups</h1>
-                        <p className="text-[12px] text-wa-textMuted">{MOCK_GROUPS.length} groups</p>
+                        <h1 className="text-[18px] font-bold text-wa-text">{t('groups')}</h1>
+                        <p className="text-[12px] text-wa-textMuted">{MOCK_GROUPS.length} {t('groups').toLowerCase()}</p>
                     </div>
                     <button
                         onClick={() => setShowCreate(true)}
@@ -46,7 +48,7 @@ export default function GroupsPage() {
                         <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M12 4v16m8-8H4" />
                         </svg>
-                        New Group
+                        {t('createGroup')}
                     </button>
                 </div>
                 {/* Search */}
@@ -58,7 +60,7 @@ export default function GroupsPage() {
                         type="text"
                         value={search}
                         onChange={e => setSearch(e.target.value)}
-                        placeholder="Search groups..."
+                        placeholder={t('searchGroups')}
                         className="w-full pl-9 pr-4 py-2 text-sm bg-gray-50 dark:bg-[#1e2535] text-wa-text border border-gray-100 dark:border-[#222838] rounded-xl focus:outline-none focus:border-wa-primary placeholder:text-wa-textMuted transition-colors"
                     />
                 </div>
@@ -100,7 +102,7 @@ export default function GroupsPage() {
                 <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm p-4" onClick={() => setShowCreate(false)}>
                     <div className="bg-white dark:bg-[#151a21] rounded-2xl shadow-2xl w-full max-w-sm p-6 space-y-4 border border-gray-100 dark:border-[#222838]" onClick={e => e.stopPropagation()}>
                         <div className="flex items-center justify-between">
-                            <h2 className="text-[16px] font-bold text-wa-text">Create Group</h2>
+                            <h2 className="text-[16px] font-bold text-wa-text">{t('createGroup')}</h2>
                             <button onClick={() => setShowCreate(false)} className="w-8 h-8 rounded-full flex items-center justify-center text-wa-textMuted hover:bg-wa-hover transition-colors">
                                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M6 18L18 6M6 6l12 12" /></svg>
                             </button>
@@ -116,8 +118,8 @@ export default function GroupsPage() {
                             />
                         </div>
                         <div className="flex gap-3 pt-2">
-                            <button onClick={() => setShowCreate(false)} className="flex-1 py-2.5 rounded-xl border border-gray-100 dark:border-[#222838] text-wa-textMuted text-sm font-semibold hover:bg-wa-hover transition-colors">Cancel</button>
-                            <button disabled={!newName.trim()} className="flex-1 py-2.5 rounded-xl bg-wa-primary hover:bg-wa-primaryDark disabled:opacity-40 text-white text-sm font-bold transition-colors shadow-md shadow-wa-primary/20">Create</button>
+                            <button onClick={() => setShowCreate(false)} className="flex-1 py-2.5 rounded-xl border border-gray-100 dark:border-[#222838] text-wa-textMuted text-sm font-semibold hover:bg-wa-hover transition-colors">{t('cancelBtn')}</button>
+                            <button disabled={!newName.trim()} className="flex-1 py-2.5 rounded-xl bg-wa-primary hover:bg-wa-primaryDark disabled:opacity-40 text-white text-sm font-bold transition-colors shadow-md shadow-wa-primary/20">{t('createGroup')}</button>
                         </div>
                     </div>
                 </div>

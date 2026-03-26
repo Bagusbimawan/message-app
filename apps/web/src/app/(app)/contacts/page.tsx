@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import MobileNavHeader from '@/components/layout/MobileNavHeader';
+import { useLanguage } from '@/components/providers/LanguageProvider';
 
 interface Contact {
     id: string;
@@ -20,6 +21,7 @@ const INITIAL_CONTACTS: Contact[] = [
 ];
 
 export default function ContactsPage() {
+    const { t } = useLanguage();
     const [contacts, setContacts] = useState<Contact[]>(INITIAL_CONTACTS);
     const [search, setSearch] = useState('');
     const [showAdd, setShowAdd] = useState(false);
@@ -62,8 +64,8 @@ export default function ContactsPage() {
     return (
         <div className="flex flex-col h-full bg-gray-50 dark:bg-[#0b0e13] overflow-hidden">
             <MobileNavHeader
-                title="Contacts"
-                subtitle={`${contacts.length} contacts`}
+                title={t('contacts')}
+                subtitle={`${contacts.length} ${t('contacts').toLowerCase()}`}
                 action={
                     <button
                         onClick={() => setShowAdd(true)}
@@ -78,8 +80,8 @@ export default function ContactsPage() {
             {/* Desktop header */}
             <div className="hidden md:flex items-center justify-between px-5 pt-5 pb-3 bg-white dark:bg-[#151a21] border-b border-gray-100 dark:border-[#222838] flex-shrink-0">
                 <div>
-                    <h1 className="text-[16px] font-bold text-wa-text">Contacts</h1>
-                    <p className="text-[12px] text-wa-textMuted">{contacts.length} contacts</p>
+                    <h1 className="text-[16px] font-bold text-wa-text">{t('contacts')}</h1>
+                    <p className="text-[12px] text-wa-textMuted">{contacts.length} {t('contacts').toLowerCase()}</p>
                 </div>
                 <button
                     onClick={() => setShowAdd(true)}
@@ -88,7 +90,7 @@ export default function ContactsPage() {
                     <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M12 4v16m8-8H4" />
                     </svg>
-                    Add
+                    {t('addBtn')}
                 </button>
             </div>
 
@@ -102,7 +104,7 @@ export default function ContactsPage() {
                         type="text"
                         value={search}
                         onChange={e => setSearch(e.target.value)}
-                        placeholder="Search contacts..."
+                        placeholder={t('searchContacts')}
                         className="w-full pl-9 pr-4 py-2 text-sm bg-gray-50 dark:bg-[#1e2535] text-wa-text border border-gray-100 dark:border-[#222838] rounded-xl focus:outline-none focus:border-wa-primary placeholder:text-wa-textMuted transition-colors"
                     />
                 </div>
@@ -117,7 +119,7 @@ export default function ContactsPage() {
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                             </svg>
                         </div>
-                        <p className="text-sm text-wa-textMuted">No contacts found</p>
+                        <p className="text-sm text-wa-textMuted">{t('noContacts')}</p>
                     </div>
                 ) : (
                     sortedKeys.map(letter => (
@@ -183,7 +185,7 @@ export default function ContactsPage() {
                         onClick={e => e.stopPropagation()}
                     >
                         <div className="flex items-center justify-between">
-                            <h2 className="text-[16px] font-bold text-wa-text">Add Contact</h2>
+                            <h2 className="text-[16px] font-bold text-wa-text">{t('addContact')}</h2>
                             <button onClick={() => setShowAdd(false)} className="w-8 h-8 rounded-full flex items-center justify-center text-wa-textMuted hover:bg-wa-hover transition-colors">
                                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M6 18L18 6M6 6l12 12" />
@@ -193,7 +195,7 @@ export default function ContactsPage() {
 
                         <div className="space-y-3">
                             <div>
-                                <label className="block text-xs font-bold text-wa-textMuted uppercase tracking-widest mb-1.5">Full Name *</label>
+                                <label className="block text-xs font-bold text-wa-textMuted uppercase tracking-widest mb-1.5">{t('fullNameLabel')}</label>
                                 <input
                                     type="text"
                                     value={form.name}
@@ -203,7 +205,7 @@ export default function ContactsPage() {
                                 />
                             </div>
                             <div>
-                                <label className="block text-xs font-bold text-wa-textMuted uppercase tracking-widest mb-1.5">Phone Number *</label>
+                                <label className="block text-xs font-bold text-wa-textMuted uppercase tracking-widest mb-1.5">{t('phoneLabel')}</label>
                                 <input
                                     type="tel"
                                     value={form.phone}
@@ -213,7 +215,7 @@ export default function ContactsPage() {
                                 />
                             </div>
                             <div>
-                                <label className="block text-xs font-bold text-wa-textMuted uppercase tracking-widest mb-1.5">Label (optional)</label>
+                                <label className="block text-xs font-bold text-wa-textMuted uppercase tracking-widest mb-1.5">{t('contactLabel')}</label>
                                 <input
                                     type="text"
                                     value={form.label}
@@ -229,14 +231,14 @@ export default function ContactsPage() {
                                 onClick={() => setShowAdd(false)}
                                 className="flex-1 py-2.5 rounded-xl border border-gray-100 dark:border-[#222838] text-wa-textMuted text-sm font-semibold hover:bg-wa-hover transition-colors"
                             >
-                                Cancel
+                                {t('cancelBtn')}
                             </button>
                             <button
                                 onClick={handleSave}
                                 disabled={!form.name.trim() || !form.phone.trim()}
                                 className="flex-1 py-2.5 rounded-xl bg-wa-primary hover:bg-wa-primaryDark disabled:opacity-40 text-white text-sm font-bold transition-colors shadow-md shadow-wa-primary/20"
                             >
-                                Save Contact
+                                {t('saveContact')}
                             </button>
                         </div>
                     </div>

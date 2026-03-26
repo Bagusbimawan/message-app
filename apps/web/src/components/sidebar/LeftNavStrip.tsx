@@ -6,10 +6,13 @@ import { useState } from 'react';
 import { usePathname } from 'next/navigation';
 import ThemeToggle from './ThemeToggle';
 import SettingsModal from '@/components/settings/SettingsModal';
+import { useLanguage } from '@/components/providers/LanguageProvider';
 
-const NAV_ITEMS = [
+type NavKey = 'chats' | 'groups' | 'community' | 'contacts' | 'reports';
+
+const NAV_ITEMS: { href: string; icon: React.ReactNode; labelKey: NavKey }[] = [
     {
-        label: 'Home',
+        labelKey: 'chats',
         href: '/chat',
         icon: (
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -18,7 +21,7 @@ const NAV_ITEMS = [
         ),
     },
     {
-        label: 'Chats',
+        labelKey: 'chats',
         href: '/chat',
         icon: (
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -27,7 +30,7 @@ const NAV_ITEMS = [
         ),
     },
     {
-        label: 'Groups',
+        labelKey: 'groups',
         href: '/groups',
         icon: (
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -36,8 +39,8 @@ const NAV_ITEMS = [
         ),
     },
     {
-        label: 'Community',
-        href: '/chat',
+        labelKey: 'community',
+        href: '/community',  // fixing the href as well
         icon: (
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 20l4-16m2 16l4-16M6 9h14M4 15h14" />
@@ -45,7 +48,7 @@ const NAV_ITEMS = [
         ),
     },
     {
-        label: 'Contacts',
+        labelKey: 'contacts',
         href: '/contacts',
         icon: (
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -54,7 +57,7 @@ const NAV_ITEMS = [
         ),
     },
     {
-        label: 'Reports',
+        labelKey: 'reports',
         href: '/reports',
         icon: (
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -79,6 +82,7 @@ function Tooltip({ label, children }: { label: string; children: React.ReactNode
 export default function LeftNavStrip() {
     const pathname = usePathname();
     const [showSettings, setShowSettings] = useState(false);
+    const { t } = useLanguage();
 
     function isNavActive(href: string) {
         if (href === '/chat') return pathname === '/chat' || pathname.startsWith('/chat/');
@@ -102,9 +106,12 @@ export default function LeftNavStrip() {
 
                 {/* Nav items */}
                 {NAV_ITEMS.map((item) => {
+                    // Removing duplicates since Home was point to /chat and Chats point to /chat
+                    if (item.labelKey === 'chats' && NAV_ITEMS.indexOf(item) !== 1) return null;
                     const active = isNavActive(item.href);
+                    const label = t(item.labelKey as any);
                     return (
-                        <Tooltip key={item.label} label={item.label}>
+                        <Tooltip key={item.labelKey} label={label}>
                             <Link
                                 href={item.href}
                                 className={clsx(
@@ -129,7 +136,7 @@ export default function LeftNavStrip() {
                 {/* Bottom: Settings + Theme + Profile */}
                 <div className="flex flex-col items-center gap-2">
                     {/* Settings */}
-                    <Tooltip label="Settings">
+                    <Tooltip label={t('settings')}>
                         <button
                             onClick={() => setShowSettings(true)}
                             className="w-11 h-11 rounded-xl flex items-center justify-center text-white/40 hover:text-white hover:bg-white/10 transition-all duration-200"
@@ -145,7 +152,7 @@ export default function LeftNavStrip() {
                     <ThemeToggle />
 
                     {/* Profile avatar */}
-                    <Tooltip label="My Profile">
+                    <Tooltip label={t('myProfile')}>
                         <Link href="/profile" className="relative group">
                             <div className="w-9 h-9 rounded-full bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center text-white text-sm font-bold shadow-md group-hover:scale-105 transition-transform">
                                 Y

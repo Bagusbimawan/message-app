@@ -43,19 +43,19 @@ export default function ChatSidebar() {
 
   const NAV_LINKS = [
     {
-      href: '/chat', label: 'Chats',
+      href: '/chat', label: t('chats'),
       icon: (<svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" /></svg>),
     },
     {
-      href: '/groups', label: 'Groups',
+      href: '/groups', label: t('groups'),
       icon: (<svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z" /></svg>),
     },
     {
-      href: '/contacts', label: 'Contacts',
+      href: '/contacts', label: t('contacts'),
       icon: (<svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" /></svg>),
     },
     {
-      href: '/profile', label: 'Profile',
+      href: '/profile', label: t('profile'),
       icon: (<svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0M19 21a7 7 0 00-14 0" /></svg>),
     },
   ] as { href: string; label: string; icon: React.ReactNode }[];
@@ -104,8 +104,8 @@ export default function ChatSidebar() {
                 </svg>
               </div>
               <div>
-                <p className="text-[16px] font-extrabold text-wa-text">Messenger</p>
-                <p className="text-[12px] text-wa-textMuted">Choose a section</p>
+                <p className="text-[16px] font-extrabold text-wa-text">{t('messengerApp')}</p>
+                <p className="text-[12px] text-wa-textMuted">{t('chooseSection')}</p>
               </div>
             </div>
             {/* Nav links */}
@@ -139,7 +139,7 @@ export default function ChatSidebar() {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
                 </svg>
-                Settings
+                {t('settings')}
               </Link>
             </div>
           </aside>
@@ -180,7 +180,7 @@ export default function ChatSidebar() {
               <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
               </svg>
-              Chats
+              {t('chats')}
               <span className="bg-wa-primary text-white text-[10px] font-bold px-1.5 py-0.5 rounded-full">
                 {homeChats.length}
               </span>
@@ -214,9 +214,9 @@ export default function ChatSidebar() {
       {activeFolder === 'home' && (
         <div className="px-4 mb-2 flex items-center gap-1 flex-shrink-0">
           {([
-            { key: 'all', label: 'All' },
-            { key: 'groups', label: 'Groups' },
-            { key: 'contacts', label: 'Contacts' },
+            { key: 'all', label: t('all') },
+            { key: 'groups', label: t('groups') },
+            { key: 'contacts', label: t('contacts') },
           ] as { key: 'all' | 'groups' | 'contacts'; label: string }[]).map(({ key, label }) => (
             <button
               key={key}
