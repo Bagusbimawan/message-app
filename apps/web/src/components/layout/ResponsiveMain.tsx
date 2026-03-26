@@ -12,7 +12,7 @@ export default function ResponsiveMain({ sidebar, children }: Props) {
     const pathname = usePathname();
 
     // On mobile: in a chat room → show chat view; otherwise → show sidebar chat list
-    const inRoom = /\/chat\/.+/.test(pathname) || /\/(contacts|profile|groups|reports)/.test(pathname);
+    const inRoom = /\/chat\/.+/.test(pathname) || /\/(contacts|profile|groups|reports|community)/.test(pathname);
 
     // Track if we need the mobile hamburger overlay (for desktop-like pages)
     const [drawerOpen, setDrawerOpen] = useState(false);

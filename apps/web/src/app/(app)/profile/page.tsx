@@ -11,7 +11,7 @@ const PROFILE = {
     location: 'Jakarta, Indonesia',
     joinedDate: 'Jan 1, 2024',
     website: 'messenger.app',
-    bio: 'Building the future, one message at a time. 🚀',
+    bio: 'Building the future, one message at a time.',
 };
 
 const STATS = [
@@ -21,12 +21,27 @@ const STATS = [
 ];
 
 const FIELDS = [
-    { icon: '📞', label: 'Phone', value: PROFILE.phone },
-    { icon: '✉️', label: 'Email', value: PROFILE.email },
-    { icon: '📍', label: 'Location', value: PROFILE.location },
-    { icon: '📅', label: 'Member since', value: PROFILE.joinedDate },
-    { icon: '🌐', label: 'Website', value: PROFILE.website },
-];
+    {
+        label: 'Phone', value: PROFILE.phone,
+        icon: (<svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" /></svg>),
+    },
+    {
+        label: 'Email', value: PROFILE.email,
+        icon: (<svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg>),
+    },
+    {
+        label: 'Location', value: PROFILE.location,
+        icon: (<svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" /><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" /></svg>),
+    },
+    {
+        label: 'Member since', value: PROFILE.joinedDate,
+        icon: (<svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>),
+    },
+    {
+        label: 'Website', value: PROFILE.website,
+        icon: (<svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" /></svg>),
+    },
+] as { label: string; value: string; icon: React.ReactNode }[];
 
 export default function ProfilePage() {
     return (
@@ -88,12 +103,21 @@ export default function ProfilePage() {
                 {/* Action buttons */}
                 <div className="grid grid-cols-3 gap-3">
                     {[
-                        { label: 'Message', icon: '💬' },
-                        { label: 'Call', icon: '📞' },
-                        { label: 'Share', icon: '↗️' },
+                        {
+                            label: 'Message',
+                            icon: (<svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" /></svg>),
+                        },
+                        {
+                            label: 'Call',
+                            icon: (<svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" /></svg>),
+                        },
+                        {
+                            label: 'Share',
+                            icon: (<svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z" /></svg>),
+                        },
                     ].map(({ label, icon }) => (
-                        <button key={label} className="flex flex-col items-center gap-2 py-4 bg-white dark:bg-[#151a21] rounded-xl border border-gray-100 dark:border-[#222838] hover:border-wa-primary hover:bg-wa-primary/5 transition-all">
-                            <span className="text-2xl">{icon}</span>
+                        <button key={label} className="flex flex-col items-center gap-2 py-4 bg-white dark:bg-[#151a21] rounded-xl border border-gray-100 dark:border-[#222838] hover:border-wa-primary hover:bg-wa-primary/5 transition-all text-wa-textMuted hover:text-wa-primary">
+                            {icon}
                             <span className="text-xs font-semibold text-wa-text">{label}</span>
                         </button>
                     ))}
@@ -104,18 +128,13 @@ export default function ProfilePage() {
                     <div className="px-5 py-3">
                         <h3 className="text-[11px] font-bold text-wa-textMuted uppercase tracking-widest">Contact Info</h3>
                     </div>
-                    {FIELDS.map(({ icon, label, value }) => (
+                    {FIELDS.map(({ label, value, icon }) => (
                         <div key={label} className="flex items-center gap-4 px-5 py-3.5">
-                            <span className="text-lg flex-shrink-0">{icon}</span>
+                            <span className="w-5 flex-shrink-0 flex items-center justify-center text-wa-textMuted">{icon}</span>
                             <div className="flex-1 min-w-0">
                                 <p className="text-[11px] text-wa-textMuted font-semibold uppercase tracking-wide mb-0.5">{label}</p>
                                 <p className="text-[14px] text-wa-text font-medium truncate">{value}</p>
                             </div>
-                            <button className="w-7 h-7 flex items-center justify-center rounded-full text-wa-textMuted hover:text-wa-primary hover:bg-gray-100 dark:hover:bg-[#1e2535] transition-colors flex-shrink-0">
-                                <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
-                                </svg>
-                            </button>
                         </div>
                     ))}
                 </div>

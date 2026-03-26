@@ -1,5 +1,6 @@
 'use client';
 
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import clsx from 'clsx';
 import { formatDistanceToNowStrict } from 'date-fns';
@@ -34,9 +35,12 @@ export default function ChatListItem({ chat, currentUid, active }: Props) {
     return lastMessage.text ?? '';
   };
 
-  const timeAgo = lastMessage?.timestamp
-    ? formatDistanceToNowStrict(lastMessage.timestamp, { addSuffix: false })
-    : '';
+  // Compute relative time only on client to prevent hydration mismatch
+  const [timeAgo, setTimeAgo] = useState('');
+  useEffect(() => {
+    if (!lastMessage?.timestamp) return;
+    setTimeAgo(formatDistanceToNowStrict(lastMessage.timestamp, { addSuffix: false }));
+  }, [lastMessage?.timestamp]);
 
   return (
     <Link

@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
+import MobileNavHeader from '@/components/layout/MobileNavHeader';
 
 interface Contact {
     id: string;
@@ -60,18 +61,25 @@ export default function ContactsPage() {
 
     return (
         <div className="flex flex-col h-full bg-gray-50 dark:bg-[#0b0e13] overflow-hidden">
-            {/* Header */}
-            <div className="flex items-center justify-between px-5 pt-5 pb-3 bg-white dark:bg-[#151a21] border-b border-gray-100 dark:border-[#222838] flex-shrink-0">
-                <div className="flex items-center gap-3">
-                    <Link href="/chat" className="md:hidden w-8 h-8 rounded-full flex items-center justify-center text-wa-textMuted hover:bg-wa-hover transition-colors">
-                        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M15 19l-7-7 7-7" />
+            <MobileNavHeader
+                title="Contacts"
+                subtitle={`${contacts.length} contacts`}
+                action={
+                    <button
+                        onClick={() => setShowAdd(true)}
+                        className="w-9 h-9 rounded-xl flex items-center justify-center bg-wa-primary text-white hover:bg-wa-primaryDark transition-colors flex-shrink-0"
+                    >
+                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M12 4v16m8-8H4" />
                         </svg>
-                    </Link>
-                    <div>
-                        <h1 className="text-[16px] font-bold text-wa-text">Contacts</h1>
-                        <p className="text-[12px] text-wa-textMuted">{contacts.length} contacts</p>
-                    </div>
+                    </button>
+                }
+            />
+            {/* Desktop header */}
+            <div className="hidden md:flex items-center justify-between px-5 pt-5 pb-3 bg-white dark:bg-[#151a21] border-b border-gray-100 dark:border-[#222838] flex-shrink-0">
+                <div>
+                    <h1 className="text-[16px] font-bold text-wa-text">Contacts</h1>
+                    <p className="text-[12px] text-wa-textMuted">{contacts.length} contacts</p>
                 </div>
                 <button
                     onClick={() => setShowAdd(true)}
